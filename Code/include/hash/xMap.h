@@ -246,11 +246,9 @@ template <class K, class V>
 xMap<K, V> &xMap<K, V>::operator=(const xMap<K, V> &map)
 {
     // YOUR CODE IS HERE
-    if (this != map)
-    {
-        this->clear();
-        this->copyMapFrom(map);
-    }
+
+    this->clear();
+    this->copyMapFrom(map);
     return *this;
 }
 

@@ -49,7 +49,6 @@ void IModel::fit(DataLoader<double, double> *pTrainLoader,
 
             //(2) BACKWARD-Pass
             // YOUR CODE IS HERE
-            this->m_pLossLayer->backward();
             this->backward();
 
             //(3) UPDATE learnable parameters

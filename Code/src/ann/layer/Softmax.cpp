@@ -46,11 +46,11 @@ xt::xarray<double> Softmax::forward(xt::xarray<double> X)
 xt::xarray<double> Softmax::backward(xt::xarray<double> DY)
 {
     xt::xarray<double> Y = this->m_aCached_Y;
-    xt::xarray<double> diagY = xt::diag(Y);
-    xt::xarray<double> outerY = xt::linalg::dot(xt::transpose(Y), Y);
+    xt::xarray<double> diagY = diag_stack(Y);
+    xt::xarray<double> outerY = outer_stack(Y, Y);
     xt::xarray<double> jacobian = diagY - outerY;
 
-    xt::xarray<double> DZ = xt::linalg::dot(jacobian, DY);
+    xt::xarray<double> DZ = matmul_on_stack(jacobian, DY);
     return DZ;
 }
 
