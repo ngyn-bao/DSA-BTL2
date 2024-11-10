@@ -45,6 +45,7 @@ xt::xarray<double> Softmax::forward(xt::xarray<double> X)
 
 xt::xarray<double> Softmax::backward(xt::xarray<double> DY)
 {
+    // YOUR CODE IS HERE
     xt::xarray<double> Y = this->m_aCached_Y;
     xt::xarray<double> diagY = diag_stack(Y);
     xt::xarray<double> outerY = outer_stack(Y, Y);

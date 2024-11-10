@@ -15,8 +15,8 @@ namespace fs = std::filesystem;
 #include "loader/dataloader.h"
 #include "config/Config.h"
 #include "dataset/DSFactory.h"
-// #include "optim/Adagrad.h"
-// #include "optim/Adam.h"
+#include "optim/Adagrad.h"
+#include "optim/Adam.h"
 #include "modelzoo/twoclasses.h"
 #include "modelzoo/threeclasses.h"
 
@@ -28,8 +28,10 @@ int main(int argc, char **argv)
     // case_batch_larger_nsamples();
 
     // Classification:
+    cout << "Two classes \n";
     twoclasses_classification();
-    // threeclasses_classification();
+    cout << "Three classes \n";
+    threeclasses_classification();
 
     return 0;
 }

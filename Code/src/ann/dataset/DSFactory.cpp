@@ -47,8 +47,7 @@ xmap<string, TensorDataset<double, double> *> *DSFactory::get_datasets_3cc()
     estimate_params(xt::view(train_table, xt::all(), xt::range(0, 2)), mu, sigma);
 
     cout << shape2str(train_table.shape()) << endl;
-    xt::xarray<double> X_train =
-        normalize(xt::view(train_table, xt::all(), xt::range(0, 2)), mu, sigma);
+    xt::xarray<double> X_train = normalize(xt::view(train_table, xt::all(), xt::range(0, 2)), mu, sigma);
     xt::xarray<double> t_train = xt::view(train_table, xt::all(), -1);
     xt::xarray<double> T_train = onehot_enc(xt::cast<unsigned long>(t_train), 3);
 

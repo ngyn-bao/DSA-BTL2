@@ -25,8 +25,8 @@ using namespace std;
 #include "loader/dataloader.h"
 #include "config/Config.h"
 #include "dataset/DSFactory.h"
-// #include "optim/Adagrad.h"
-// #include "optim/Adam.h"
+#include "optim/Adagrad.h"
+#include "optim/Adam.h"
 
 void twoclasses_classification()
 {
@@ -56,6 +56,9 @@ void twoclasses_classification()
     // train + eval
     model.compile(&optim, &loss, &metrics);
     model.fit(&train_loader, &valid_loader, 1000);
+    // cout << "Training set size: " << train_loader.get_batch_size() << endl;
+    // cout << "Validation set size: " << valid_loader.get_batch_size() << endl;
+    // cout << "Test set size: " << test_loader.get_batch_size() << endl;
     string base_path = "./models";
     model.save(base_path + "/" + "2c-classification-1");
     double_tensor eval_rs = model.evaluate(&test_loader);

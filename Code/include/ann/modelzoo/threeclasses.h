@@ -25,8 +25,8 @@ using namespace std;
 #include "loader/dataloader.h"
 #include "config/Config.h"
 #include "dataset/DSFactory.h"
-// #include "optim/Adagrad.h"
-// #include "optim/Adam.h"
+#include "optim/Adagrad.h"
+#include "optim/Adam.h"
 
 void threeclasses_classification()
 {
@@ -39,6 +39,10 @@ void threeclasses_classification()
     DataLoader<double, double> valid_loader(valid_ds, 50, false, false);
     DataLoader<double, double> test_loader(test_ds, 50, false, false);
 
+    // cout << "Training set size: " << train_loader.get_batch_size() << endl;
+    // cout << "Validation set size: " << valid_loader.get_batch_size() << endl;
+    // cout << "Test set size: " << test_loader.get_batch_size() << endl;
+
     int nClasses = 3;
     ILayer *layers[] = {
         new FCLayer(2, 50, true),
@@ -49,7 +53,8 @@ void threeclasses_classification()
         new Softmax()};
     MLPClassifier model("./config.txt", "3c-classification", layers, sizeof(layers) / sizeof(ILayer *));
 
-    Adam optim(1e-3, 0.9, 0.99);
+    // Adam optim(1e-3, 0.9, 0.99);
+    SGD optim(2e-3);
     CrossEntropy loss;
     ClassMetrics metrics(nClasses);
 

@@ -180,17 +180,16 @@ xt::xarray<double> FCLayer::forward(xt::xarray<double> X)
 xt::xarray<double> FCLayer::backward(xt::xarray<double> DY)
 {
     // YOUR CODE IS HERE
+    xt::xarray<double> dW_batch = outer_stack(DY, this->m_aCached_X);
+    this->m_aGrad_W = xt::sum(dW_batch, {0});
     this->m_unSample_Counter += DY.shape()[0];
-
-    this->m_aGrad_W += xt::linalg::tensordot(xt::transpose(this->m_aCached_X), DY, {1}, {0});
 
     if (this->m_bUse_Bias)
     {
-        this->m_aGrad_b += xt::sum(DY, {0});
+        this->m_aGrad_b = xt::sum(DY, {0});
     }
 
-    xt::xarray<double> DX = xt::linalg::tensordot(DY, this->m_aWeights, {1}, {0});
-
+    xt::xarray<double> DX = xt::linalg::dot(DY, this->m_aWeights);
     return DX;
 }
 
