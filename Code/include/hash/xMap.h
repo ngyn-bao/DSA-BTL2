@@ -326,7 +326,7 @@ V xMap<K, V>::remove(K key, void (*deleteKeyInMap)(K))
 
             list.removeItem(pEntry, xMap<K, V>::deleteEntry);
 
-                        this->count--;
+            this->count--;
             return removedValue;
         }
     }
@@ -348,13 +348,14 @@ bool xMap<K, V>::remove(K key, V value, void (*deleteKeyInMap)(K), void (*delete
     {
         if (keyEQ(pEntry->key, key) && valueEQ(pEntry->value, value))
         {
-            list.removeItem(pEntry, xMap<K, V>::deleteEntry);
 
             if (deleteKeyInMap)
-                deleteKeyInMap(key);
+                deleteKeyInMap(pEntry->key);
 
             if (deleteValueInMap)
-                deleteValueInMap(value);
+                deleteValueInMap(pEntry->value);
+
+            list.removeItem(pEntry, xMap<K, V>::deleteEntry);
 
             this->count--;
             return true;
