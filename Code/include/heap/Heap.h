@@ -424,7 +424,7 @@ void Heap<T>::reheapUp(int position)
 {
     // YOUR CODE IS HERE
     int parent = (position - 1) / 2;
-    while (position > 0 && this->aLTb(this->elements[parent], this->elements[position]))
+    while (position > 0 && this->aLTb(this->elements[position], this->elements[parent]))
     {
         this->swap(position, parent);
         position = parent;
@@ -438,16 +438,16 @@ void Heap<T>::reheapDown(int position)
     // YOUR CODE IS HERE
     int leftChild = 2 * position + 1;
     int rightChild = 2 * position + 2;
-    int largest = position;
+    int smallest = position;
 
-    if (leftChild < this->count && aLTb(this->elements[largest], this->elements[leftChild]))
-        largest = leftChild;
-    if (rightChild < this->count && aLTb(this->elements[largest], this->elements[rightChild]))
-        largest = rightChild;
-    if (largest != position)
+    if (leftChild < this->count && aLTb(this->elements[leftChild], this->elements[smallest]))
+        smallest = leftChild;
+    if (rightChild < this->count && aLTb(this->elements[rightChild], this->elements[smallest]))
+        smallest = rightChild;
+    if (smallest != position)
     {
-        this->swap(position, largest);
-        reheapDown(largest);
+        this->swap(position, smallest);
+        reheapDown(smallest);
     }
 }
 

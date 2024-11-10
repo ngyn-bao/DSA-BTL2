@@ -246,8 +246,6 @@ template <class K, class V>
 xMap<K, V> &xMap<K, V>::operator=(const xMap<K, V> &map)
 {
     // YOUR CODE IS HERE
-
-    this->clear();
     this->copyMapFrom(map);
     return *this;
 }
@@ -322,12 +320,13 @@ V xMap<K, V>::remove(K key, void (*deleteKeyInMap)(K))
         if (keyEQ(pEntry->key, key))
         {
             V removedValue = pEntry->value;
-            list.removeItem(pEntry, xMap<K, V>::deleteEntry);
 
             if (deleteKeyInMap)
                 deleteKeyInMap(pEntry->key);
 
-            this->count--;
+            list.removeItem(pEntry, xMap<K, V>::deleteEntry);
+
+                        this->count--;
             return removedValue;
         }
     }
@@ -426,9 +425,9 @@ void xMap<K, V>::clear()
         deleteValues(this);
 
     // Remove all entries in the current map
-    for (int idx = 0; idx < this->capacity; idx++)
+    for (int i = 0; i < this->capacity; i++)
     {
-        DLinkedList<Entry *> &list = this->table[idx];
+        DLinkedList<Entry *> &list = this->table[i];
         for (auto pEntry : list)
             delete pEntry;
         list.clear();
@@ -437,8 +436,8 @@ void xMap<K, V>::clear()
     // Remove table
     delete[] table;
 
-    this->table = new DLinkedList<Entry *>[capacity];
-    this->count = 0;
+    this->capacity = 10;
+    this->table = new DLinkedList<Entry *>[this->capacity];
 }
 
 template <class K, class V>
@@ -491,7 +490,7 @@ DLinkedList<int> xMap<K, V>::clashes()
 
         if (list.size() > 1)
         {
-            clashList.add(i);
+            clashList.add(list.size());
         }
     }
 

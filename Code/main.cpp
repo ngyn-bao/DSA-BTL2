@@ -28,17 +28,19 @@ int main(int argc, char **argv)
     }
 
     // TEST HASH :
-    void (*hashDemos[])() = {0, hashDemo1, hashDemo2, heapDemo3, hashDemo4, hashDemo5, hashDemo6, hashDemo7, countryDemo};
+    void (*hashDemos[])() = {0, hashDemo1, hashDemo2, hashDemo3, hashDemo4, hashDemo5, hashDemo6};
     outFile1 << "TEST HASH DEMO:......................................." << endl;
 
-    for (int i = 1; i <= 8; i++)
+    for (int i = 1; i <= 6; i++)
     { // test hash i<=7
         outFile1 << "Demo " << i << "-------------------------" << endl;
+        // outFile1 << "Demo " << 3 << "-------------------------" << endl;
         outFile1 << endl;
 
         streambuf *coutBuffer = cout.rdbuf();
         cout.rdbuf(outFile1.rdbuf());
         hashDemos[i]();
+        // hashDemo3();
         cout.rdbuf(coutBuffer);
     }
 
