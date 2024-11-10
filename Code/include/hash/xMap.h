@@ -438,6 +438,7 @@ void xMap<K, V>::clear()
     delete[] table;
 
     this->capacity = 10;
+    this->count = 0;
     this->table = new DLinkedList<Entry *>[this->capacity];
 }
 
