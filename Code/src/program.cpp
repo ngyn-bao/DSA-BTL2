@@ -19,6 +19,7 @@ namespace fs = std::filesystem;
 #include "optim/Adam.h"
 #include "modelzoo/twoclasses.h"
 #include "modelzoo/threeclasses.h"
+#include "modelzoo/mlpDemo.h"
 
 int main(int argc, char **argv)
 {
@@ -32,6 +33,23 @@ int main(int argc, char **argv)
     twoclasses_classification();
     cout << "Three classes \n";
     threeclasses_classification();
+    int num;
+    cin >> num;
+
+    switch (num)
+    {
+    case 1:
+        mlpDemo1();
+        break;
+    case 2:
+        mlpDemo2();
+        break;
+    case 3:
+        mlpDemo3();
+        break;
+    default:
+        break;
+    }
 
     return 0;
 }
