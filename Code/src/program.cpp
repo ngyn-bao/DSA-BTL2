@@ -33,7 +33,9 @@ int main(int argc, char **argv)
     twoclasses_classification();
     cout << "Three classes \n";
     threeclasses_classification();
+
     int num;
+    cout << "Nhập số để test: ";
     cin >> num;
 
     switch (num)
