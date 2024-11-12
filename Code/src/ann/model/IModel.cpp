@@ -27,13 +27,12 @@ void IModel::fit(DataLoader<double, double> *pTrainLoader,
     //
     on_begin_training(pTrainLoader, pValidLoader, nepoch, verbose);
 
-    cout << "hello";
     for (int epoch = 1; epoch <= nepoch; epoch++)
     {
         on_begin_epoch();
         m_pMetricLayer->reset_metrics();
 
-            for (auto batch : *pTrainLoader)
+        for (auto batch : *pTrainLoader)
         {
             double_tensor X = batch.getData();
             double_tensor t = batch.getLabel();
