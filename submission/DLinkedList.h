@@ -281,17 +281,17 @@ public:
         {
             return pNode != iterator.pNode;
         }
-        // Prefix ++ overload
-        BWDIterator &operator++()
+        // Prefix -- overload
+        BWDIterator &operator--()
         {
             pNode = pNode->prev;
             return *this;
         }
-        // Postfix ++ overload
-        BWDIterator operator++(int)
+        // Postfix -- overload
+        BWDIterator operator--(int)
         {
             BWDIterator iterator = *this;
-            ++*this;
+            --*this;
             return iterator;
         }
     };

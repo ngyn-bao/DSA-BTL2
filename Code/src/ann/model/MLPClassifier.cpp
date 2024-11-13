@@ -194,7 +194,7 @@ void MLPClassifier::backward()
     // YOUR CODE IS HERE
     double_tensor DY = m_pLossLayer->backward();
 
-    for (auto it = m_layers.bbegin(); it != m_layers.bend(); ++it)
+    for (auto it = m_layers.bbegin(); it != m_layers.bend(); --it)
     {
         DY = (*it)->backward(DY);
     }
